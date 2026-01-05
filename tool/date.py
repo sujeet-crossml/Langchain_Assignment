@@ -2,11 +2,12 @@
 Date Utility Tool
 Calculates future dates.
 """
-
+import logging
 from datetime import datetime, timedelta
 
 from langchain.tools import tool
 
+logger = logging.getLogger("DateTool")
 # for getting the future date
 @tool
 def future_date(days: int) -> str:
@@ -20,8 +21,13 @@ def future_date(days: int) -> str:
     Returns:
         str: Future date in YYYY-MM-DD format, or an error message if calculation fails.
     """
+    logger.info(f"Received days input: {days}")
     try:
         target_date = datetime.today() + timedelta(days=days)
-        return target_date.strftime("%Y-%m-%d")
+        result = target_date.strftime("%Y-%m-%d")
+        logger.info(f"Calculated date: {result}")
+        return result
+    
     except Exception as e:
+        logger.error(f"Date tool error: {e}")
         return f"Error calculating date: {str(e)}"

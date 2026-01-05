@@ -8,10 +8,14 @@ Safely evaluates arithmetic expressions.
 # Allowed operators for safety
 import ast
 import operator
+import logging
 from typing import Any
 
 from langchain.tools import tool
 
+
+
+logger = logging.getLogger("MathTool")
 # Supported operators
 OPERATORS = {
     ast.Add: operator.add,
@@ -67,9 +71,11 @@ def math_calculator(expression: str) -> str:
     Returns:
         str: Result of calculation or error message
     """
+    logger.info(f"Input expression: {expression}")
     try:
         tree = ast.parse(expression, mode="eval")
         result = _eval_expr(tree.body)
         return f"Result: {result}"
     except Exception as e:
+        logger.error(f"Math error: {e}")
         return f"Error evaluating expression: {str(e)}"

@@ -2,23 +2,25 @@
 Text Analyzer Tool
 Provides word count, character count, and basic sentiment.
 """
+import logging
 
 from langchain.tools import tool
 
-
+logger = logging.getLogger("TextAnalyzer")
 @tool
 def analyze_text(text: str) -> dict:
     """
-Summary:
-    Analyze text to compute basic statistics and sentiment.
+    Summary:
+        Analyze text to compute basic statistics and sentiment.
 
-Args:
-    text (str): Input text to be analyzed.
+    Args:
+        text (str): Input text to be analyzed.
 
-Returns:
-    dict: A dictionary containing word count, character count,
-          and sentiment, or an error message if analysis fails.
-"""
+    Returns:
+        dict: A dictionary containing word count, character count,
+            and sentiment, or an error message if analysis fails.
+    """
+    logger.info(f"Analyzing text: {text}")
     try:
         words = text.split()
         char_count = len(text)
@@ -39,11 +41,14 @@ Returns:
         elif sentiment_score < 0:
             sentiment = "Negative"
 
-        return {
+        result =  {
             "word_count": len(words),
             "character_count": char_count,
             "sentiment": sentiment
         }
+        logger.info(f"Analysis result: {result}")
+        return result
 
     except Exception as e:
+        logger.error(f"Text analysis error: {e}")
         return {"error": str(e)}

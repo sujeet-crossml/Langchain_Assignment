@@ -3,12 +3,14 @@ Weather Tool using OpenWeatherMap API
 """
 
 import requests
+import logging
 
 from langchain.tools import tool
 
 from cred import WEATHER_API_KEY
 
 
+logger = logging.getLogger("WeatherTool")
 @tool
 def get_weather(city: str) -> dict:
     """
@@ -26,6 +28,7 @@ def get_weather(city: str) -> dict:
     """
     Fetches live weather data for a city.
     """
+    logger.info(f"Fetching weather for: {city}")
     try:
         url = (
             f"https://api.openweathermap.org/data/2.5/weather"
@@ -33,10 +36,12 @@ def get_weather(city: str) -> dict:
         )
         response = requests.get(url)
         data = response.json()
-
-        return {
+        result = {
             "temperature": data["main"]["temp"],
             "condition": data["weather"][0]["description"]
         }
+        logger.info(f"Weather result: {result}")
+        return result
     except Exception as e:
+        logger.error(f"Weather API error: {e}")
         return {"error": str(e)}
