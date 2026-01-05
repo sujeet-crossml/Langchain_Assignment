@@ -3,14 +3,15 @@ Weather Tool using OpenWeatherMap API
 """
 
 import requests
-import logging
+from logs import setup_logger
 
 from langchain.tools import tool
 
 from cred import WEATHER_API_KEY
 
 
-logger = logging.getLogger("WeatherTool")
+logger = setup_logger()
+
 @tool
 def get_weather(city: str) -> dict:
     """

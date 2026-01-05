@@ -8,14 +8,14 @@ Safely evaluates arithmetic expressions.
 # Allowed operators for safety
 import ast
 import operator
-import logging
+from logs import setup_logger
 from typing import Any
 
 from langchain.tools import tool
 
 
 
-logger = logging.getLogger("MathTool")
+logger = setup_logger()
 # Supported operators
 OPERATORS = {
     ast.Add: operator.add,

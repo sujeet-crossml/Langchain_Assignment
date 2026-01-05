@@ -2,11 +2,17 @@
 """
 Run all examples from one file.
 """
+from logs import setup_logger
+
 from agents.single_tool import single_tool_agent
 from agents.multi_tools import multi_tool_agent
 from agents.api_agent import api_agent
 
 if __name__ == "__main__":
+    logger = setup_logger()
+
+    logger.info("🚀 Logging initialized successfully")
+    
     # Invoking the agent for the response of content for math tool
     math_response = single_tool_agent.invoke( {"messages": [{"role": "user", "content": "What is (234 * 12) + 98?"}]})
     print("\n--- Example 1 ---")

@@ -2,15 +2,38 @@ import logging
 import os
 from datetime import datetime
 
-LOG_DIR = "logs"
-os.makedirs(LOG_DIR, exist_ok=True)
+def setup_logger():
+    log_dir = "logs"
+    os.makedirs(log_dir, exist_ok=True)
 
-LOG_FILE = f"{LOG_DIR}/agent_run_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+    log_file = os.path.join(
+        log_dir,
+        f"agent_run_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+    )
 
-logging.basicConfig(
-    filename=LOG_FILE,
-    level=logging.INFO,
-    format="%(asctime)s | %(levelname)s | %(name)s | %(message)s"
-)
+    logger = logging.getLogger("LangChainAgent")
+    logger.setLevel(logging.INFO)
 
-logger = logging.getLogger("LangChain-Agent")
+    # IMPORTANT: Prevent duplicate handlers
+    if logger.handlers:
+        return logger
+
+    # File handler
+    file_handler = logging.FileHandler(log_file)
+    file_handler.setLevel(logging.INFO)
+
+    # Console handler (optional but recommended)
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.INFO)
+
+    formatter = logging.Formatter(
+        "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
+    )
+
+    file_handler.setFormatter(formatter)
+    console_handler.setFormatter(formatter)
+
+    logger.addHandler(file_handler)
+    logger.addHandler(console_handler)
+
+    return logger

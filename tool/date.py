@@ -2,12 +2,12 @@
 Date Utility Tool
 Calculates future dates.
 """
-import logging
+from logs import setup_logger
 from datetime import datetime, timedelta
 
 from langchain.tools import tool
 
-logger = logging.getLogger("DateTool")
+logger = setup_logger()
 # for getting the future date
 @tool
 def future_date(days: int) -> str:

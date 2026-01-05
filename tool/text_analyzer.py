@@ -2,11 +2,11 @@
 Text Analyzer Tool
 Provides word count, character count, and basic sentiment.
 """
-import logging
+from logs import setup_logger
 
 from langchain.tools import tool
 
-logger = logging.getLogger("TextAnalyzer")
+logger = setup_logger()
 @tool
 def analyze_text(text: str) -> dict:
     """
