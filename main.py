@@ -1,24 +1,40 @@
 
+"""
+Run all examples from one file.
+"""
+from agents.single_tool import single_tool_agent
+from agents.multi_tools import multi_tool_agent
+from agents.api_agent import api_agent
 
-from langchain.agents import create_agent
-from langchain_google_genai import ChatGoogleGenerativeAI
+if __name__ == "__main__":
+    math_response = single_tool_agent.invoke( {"messages": [{"role": "user", "content": "What is (234 * 12) + 98?"}]})
+    print("\n--- Example 1 ---")
+    print(math_response["messages"][-1].content)
 
-from cred import gemini_api_key
+    # text_analyzer_response = single_tool_agent.invoke({"messages": [{"role": "user", "content": "Analyze this paragraph: I love this product. It is excellent!"}]})
+    # print("\n--- Example 2 ---")
+    # print(text_analyzer_response["messages"][-1].content)
 
-model = ChatGoogleGenerativeAI(model = "gemini-3-flash-preview", api_key = gemini_api_key)
+    # date_response = single_tool_agent.invoke({"messages": [{"role": "user", "content": "What will be the date 45 days from today?"}]})
+    # print("\n--- Example 3 ---")
+    # print(date_response["messages"][-1].content)
 
-def get_weather(city: str) -> str:
-    """Get weather for a given city."""
-    return f"It's always sunny in {city}!"
+    
+    multi_response = multi_tool_agent.invoke(
+        {"messages": [
+            {"role": "user",
+            "content": "Calculate the total cost if I buy 3 items priced at 499 each and tell me the delivery date if shipping takes 7 days."}
+            ]}
+        )
+    print("\n--- Multi Tool Example ---")
+    print(multi_response["messages"][-1].content)
 
-agent = create_agent(
-    model = model,
-    tools = [get_weather],
-    system_prompt = "You are a helpful assistant",
-)
+    api_response = api_agent.invoke({
+        "messages": [
+            {"role": "user",
+             "content": "What is today's weather in Chandigarh and suggest clothing accordingly?"}
+        ]}
+    )
+    print("\n--- Real API Tool Example ---")
+    print(api_response["messages"][-1].content)
 
-response = agent.invoke(
-    {"messages": [{"role": "user", "content": "what is the weather in sf"}]}
-)
-
-print(response['messages'])
