@@ -10,5 +10,5 @@ from .multi_tools import llm
 api_agent = create_agent(
     model=llm,
     tools=[get_weather],
-    system_prompt='You are helpful assistance.'
+    system_prompt='You are helpful assistant.'
 )
