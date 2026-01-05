@@ -5,8 +5,6 @@ Safely evaluates arithmetic expressions.
 
 
 
-
-
 # Allowed operators for safety
 import ast
 import operator

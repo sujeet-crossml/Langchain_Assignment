@@ -7,6 +7,7 @@ from cred import gemini_api_key
 from tool.math import math_calculator
 from tool.date import future_date
 from tool.text_analyzer import analyze_text
+from prompts import system_prompt
 
 # defining chat model for gemini with api key config
 llm = ChatGoogleGenerativeAI(
@@ -20,7 +21,7 @@ tools = [math_calculator, future_date, analyze_text]
 
 # creatin agent for model calling with multiple tools
 multi_tool_agent = create_agent(
-    model=llm,
-    tools=tools,
-    system_prompt='You are helpful assistance.'
+    model = llm,
+    tools = tools,
+    system_prompt = system_prompt
 )
