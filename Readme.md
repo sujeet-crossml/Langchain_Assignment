@@ -40,32 +40,9 @@ The goal of this assignment is to:
   - `gemini-2.5-flash`
   - `gemini-2.5-flash-lite`
 - **Environment:** Virtual Environment (`venv`)
-- **Weather API:** OpenWeatherMap
-
+- **API:** OpenWeatherMap
 
 ---
-
-## 📂 Project Structure
-
-LANGCHAIN_ASSIGNMENT/
-│
-├── agents/
-│ ├── api_agent.py # Agent using external API tool (weather)
-│ ├── multi_tools.py # Agent using multiple tools
-│ ├── single_tool.py # Agent using a single tool
-│
-├── tool/
-│ ├── math.py # Math calculation tool
-│ ├── date.py # Date / future date tool
-│ ├── text_analyzer.py # Text analysis tool
-│ ├── weather.py # Weather API tool
-│
-├── cred.py # Gemini API key configuration
-├── main.py # Application entry point
-├── requirements.txt # Project dependencies
-├── .env # Environment variables (ignored by git)
-├── .gitignore
-└── Readme.md
 
 yaml
 Copy code
@@ -75,63 +52,53 @@ Copy code
 ## ⚙️ Installation & Setup
 
 ### 1️⃣ Clone the Repository
-```bash
-git clone https://github.com/sujeet-crossml/Langchain_Assignment.git
-cd Langchain_Assignment
-2️⃣ Create & Activate Virtual Environment
-bash
-Copy code
-python -m venv myenv
-source myenv/bin/activate     # Linux / macOS
-myenv\Scripts\activate        # Windows
-3️⃣ Install Dependencies
-bash
-Copy code
-pip install -r requirements.txt
-🔐 API Key Configuration
+
+            git clone https://github.com/sujeet-crossml/Langchain_Assignment.git
+            cd Langchain_Assignment
+
+### 2️⃣ Create & Activate Virtual Environment
+
+      python -m venv myenv
+      source myenv/bin/activate     # Linux / macOS
+      myenv\Scripts\activate        # Windows
+
+### 🔐 API Key Configuration
+
 Add your Gemini API Key in cred.py:
 
-python
-Copy code
-gemini_api_key = "YOUR_GEMINI_API_KEY"
-⚠️ Important:
+    gemini_api_key = "YOUR_GEMINI_API_KEY"
+
+
+### ⚠️ Important:
 Do not commit your real API key to GitHub.
 Use .env and environment variables for production projects.
 
-▶️ How to Run
+### ▶️ How to Run
+
 Run the main application:
 
-bash
-Copy code
-python main.py
+    python main.py
+
+
 The agent will:
+- Understand the user query
+- Select the appropriate tool
+- Execute the tool
+- Return the final response
 
-Understand the user query
+### 📌 Example Use Cases
 
-Select the appropriate tool
+- Solve mathematical calculations
+- Find future dates
+- Analyze text content
+- Fetch weather information
+- Dynamically choose tools based on query intent
 
-Execute the tool
+### 🧪 Learning Outcomes
 
-Return the final response
+- Practical understanding of LangChain Agents
+- Tool invocation and orchestration
+- Differences between single-tool and multi-tool agents
+- API integration with LLMs
+- Clean project structuring for AI applications
 
-📌 Example Use Cases
-Solve mathematical calculations
-
-Find future dates
-
-Analyze text content
-
-Fetch weather information
-
-Dynamically choose tools based on query intent
-
-🧪 Learning Outcomes
-Practical understanding of LangChain Agents
-
-Tool invocation and orchestration
-
-Differences between single-tool and multi-tool agents
-
-API integration with LLMs
-
-Clean project structuring for AI applications
