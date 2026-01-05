@@ -7,19 +7,22 @@ from agents.multi_tools import multi_tool_agent
 from agents.api_agent import api_agent
 
 if __name__ == "__main__":
+    # Invoking the agent for the response of content for math tool
     math_response = single_tool_agent.invoke( {"messages": [{"role": "user", "content": "What is (234 * 12) + 98?"}]})
     print("\n--- Example 1 ---")
     print(math_response["messages"][-1].content)
 
+    # Invoking the agent for the response of content for text analyzer tool
     # text_analyzer_response = single_tool_agent.invoke({"messages": [{"role": "user", "content": "Analyze this paragraph: I love this product. It is excellent!"}]})
     # print("\n--- Example 2 ---")
     # print(text_analyzer_response["messages"][-1].content)
 
+    # Invoking the agent for the response of content for date tool
     # date_response = single_tool_agent.invoke({"messages": [{"role": "user", "content": "What will be the date 45 days from today?"}]})
     # print("\n--- Example 3 ---")
     # print(date_response["messages"][-1].content)
 
-    
+    # Invoking the agent for the response of content for multiple tools
     multi_response = multi_tool_agent.invoke(
         {"messages": [
             {"role": "user",
@@ -29,6 +32,7 @@ if __name__ == "__main__":
     print("\n--- Multi Tool Example ---")
     print(multi_response["messages"][-1].content)
 
+    # Invoking the agent for the response of content for real api tool
     api_response = api_agent.invoke({
         "messages": [
             {"role": "user",

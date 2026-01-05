@@ -25,7 +25,19 @@ OPERATORS = {
 
 
 def _eval_expr(node: ast.AST) -> Any:
-    """Recursively evaluate an AST expression node."""
+    """
+    Summary:
+        Recursively evaluate a numeric Python AST expression node.
+
+    Args:
+        node (ast.AST): AST node representing a numeric expression.
+
+    Returns:
+        Any: Result of the evaluated expression.
+
+    Raises:
+        ValueError: If the expression contains unsupported nodes or operators.
+    """
 
     if isinstance(node, ast.Constant):
         if isinstance(node.value, (int, float)):

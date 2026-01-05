@@ -8,6 +8,7 @@ load_dotenv()
 # Getting gemini api key
 gemini_api_key = os.getenv("GEMINI_API_KEY", "")
 
+# Getting weather api key
 WEATHER_API_KEY = os.getenv("WEATHER_API_KEY", "")
 
 if not gemini_api_key:

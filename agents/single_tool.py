@@ -10,7 +10,7 @@ from tool.math import math_calculator
 from tool.text_analyzer import analyze_text
 from tool.date import future_date
 
-
+# defining chat model for gemini with api key config
 llm = ChatGoogleGenerativeAI(
     model="gemini-2.5-flash",
     google_api_key=gemini_api_key,
@@ -18,8 +18,7 @@ llm = ChatGoogleGenerativeAI(
 )
 
 
-
-# Create agent
+# creating agent for model calling with real api tools
 single_tool_agent = create_agent(
     model=llm,
     tools=[math_calculator]
