@@ -1,3 +1,7 @@
+from agents.memory import fetch_memory
+
+memory_context = fetch_memory("dates or mathematics expression or location or text sentiments")
+
 system_prompt = '''
 SYSTEM ROLE:
 
@@ -25,6 +29,7 @@ You are an intelligent multi-tool reasoning assistant. Your task is to manage an
    - Examples: Weather API, Currency Exchange API, News API.
    - Purpose: Fetch real-time external data and provide human-readable output.
    - Notes: Parse API response carefully and summarize meaningfully.
+   - If he want some suggestion related to weather then suggest them according to the weather.
 
 
 TOOL USAGE INSTRUCTIONS:
@@ -34,6 +39,8 @@ TOOL USAGE INSTRUCTIONS:
 - **Validate inputs** before sending to any tool.
 - After calling the tool(s), **explain the results in natural language**.
 
+USER MEMORY:
+    {memory_context}
 
 OUTPUT FORMAT RULES:
 

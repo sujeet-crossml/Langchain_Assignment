@@ -7,11 +7,17 @@ from logs import setup_logger
 from agents.single_tool import single_tool_agent
 from agents.multi_tools import multi_tool_agent
 from agents.api_agent import api_agent
+from agents.memory import add_memory
 
 if __name__ == "__main__":
     logger = setup_logger()
 
     logger.info("🚀 Logging initialized successfully")
+
+    add_memory("User prefers DD-MM-YYYY date format for any queries.")
+    add_memory("User preffers solving equations with every steps and also likes explaination for every steps. ")
+    add_memory("User is located in Chandigarh.")
+    add_memory("User preffer text sentiment answer in one line with small reasons.")
     
     # Invoking the agent for the response of content for math tool
     math_response = single_tool_agent.invoke( {"messages": [{"role": "user", "content": "What is (234 * 12) + 98?"}]})
@@ -42,7 +48,7 @@ if __name__ == "__main__":
     api_response = api_agent.invoke({
         "messages": [
             {"role": "user",
-             "content": "What is today's weather in Chandigarh and suggest clothing accordingly?"}
+             "content": "What is today's weather in chandigarh and suggest me clothing accordingly?"}
         ]}
     )
     print("\n--- Real API Tool Example ---")
